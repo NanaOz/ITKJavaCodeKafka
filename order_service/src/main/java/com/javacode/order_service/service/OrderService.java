@@ -1,32 +1,34 @@
 package com.javacode.order_service.service;
 
+import com.javacode.order_service.dto.OrderDTO;
 import com.javacode.order_service.model.Order;
 import com.javacode.order_service.model.OrderStatus;
 import com.javacode.order_service.repository.OrderRepository;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
     private final OrderRepository repository;
-    private final KafkaTemplate<String, Order> kafkaTemplate;
+    private final KafkaProducerService kafkaProducerService;
     private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
 
-    public OrderService(OrderRepository repository, KafkaTemplate<String, Order> kafkaTemplate) {
+    public OrderService(OrderRepository repository, KafkaProducerService kafkaProducerService) {
         this.repository = repository;
-        this.kafkaTemplate = kafkaTemplate;
+        this.kafkaProducerService = kafkaProducerService;
     }
 
+    @Transactional
     public Order createOrder(Order order) {
-        order.setStatus(OrderStatus.CREATED);
         Order savedOrder = repository.save(order);
-        kafkaTemplate.send("new_orders", savedOrder);
+        kafkaProducerService.sendMessage(OrderDTO.fromOrder(savedOrder));
         logger.info("Информация о заказе отправлеа {}", savedOrder);
         return savedOrder;
     }
 
+    @Transactional
     public Order updateOrder(Long id, OrderStatus status) {
         Order order = repository.findById(id).orElseThrow();
         order.setStatus(status);
@@ -35,5 +37,10 @@ public class OrderService {
 
     public Order getOrder(Long id) {
         return repository.findById(id).orElseThrow();
+    }
+
+    @Transactional
+    public void deleteOrder(Long id) {
+        repository.deleteById(id);
     }
 }
