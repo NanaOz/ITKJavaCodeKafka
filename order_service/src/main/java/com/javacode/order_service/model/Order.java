@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,12 +20,18 @@ public class Order {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "productName")
-    public String productName;
+    @Column(name = "customerId", nullable = false)
+    private Long customerId;
 
-    @Column(name = "quantity")
-    private int quantity;
+    @Column(name = "productName")
+    private String productName;
+
+    @Column(name = "productCount")
+    private int productCount;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    @Column(name = "totalPrice", nullable = false)
+    private BigDecimal totalPrice;
 }
