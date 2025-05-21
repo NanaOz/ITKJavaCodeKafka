@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AmplicodePersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit moduleName="notifications_service" name="Default">
+        <packages>
+          <package value="com.javacode.notifications_service" />
+        </packages>
+      </persistence-unit>
+      <persistence-unit moduleName="order_service" name="Default">
+        <packages>
+          <package value="com.javacode.order_service" />
+        </packages>
+      </persistence-unit>
+      <persistence-unit moduleName="payment_service" name="Default">
+        <packages>
+          <package value="com.javacode.payment_service" />
+        </packages>
+      </persistence-unit>
+      <persistence-unit moduleName="shipping_service" name="Default">
+        <packages>
+          <package value="com.javacode.shipping_service" />
+        </packages>
+      </persistence-unit>
+    </persistence-units>
+  </component>
+</project>
