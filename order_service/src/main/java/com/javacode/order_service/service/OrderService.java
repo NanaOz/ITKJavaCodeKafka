@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class OrderService {
     private final OrderRepository repository;
     private final KafkaProducerService kafkaProducerService;
-    private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
 
     public OrderService(OrderRepository repository, KafkaProducerService kafkaProducerService) {
         this.repository = repository;
@@ -24,7 +23,6 @@ public class OrderService {
     public Order createOrder(Order order) {
         Order savedOrder = repository.save(order);
         kafkaProducerService.sendMessage(OrderDTO.fromOrder(savedOrder));
-        logger.info("Информация о заказе отправлеа {}", savedOrder);
         return savedOrder;
     }
 

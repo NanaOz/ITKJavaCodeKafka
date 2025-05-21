@@ -13,6 +13,6 @@ public class OrderDTO {
     private String orderStatus;
 
     public static OrderDTO fromOrder(Order order) {
-        return new OrderDTO(order.getId(), order.getStatus().name());
+        return new OrderDTO(order.getId(), order.getStatus().toString());
     }
 }

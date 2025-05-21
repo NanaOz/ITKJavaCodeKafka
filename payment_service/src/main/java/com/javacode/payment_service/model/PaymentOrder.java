@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -15,14 +14,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "payment")
-public class Payment {
+public class PaymentOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
-
-    private BigDecimal amount;
-    private PaymentStatus status;
+    private OrderStatus status;
     private LocalDateTime paymentDate;
-    private String orderId;
 }

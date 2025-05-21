@@ -6,20 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "notification")
-public class Notification {
+public class NotificationOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "message")
-    private String message;
-
-    @Column(name = "recipient")
-    private String recipient;
+    private OrderStatus orderStatus;
+    private LocalDateTime orderDate;
 }

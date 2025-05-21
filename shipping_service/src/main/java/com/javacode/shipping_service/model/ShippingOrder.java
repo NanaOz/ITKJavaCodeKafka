@@ -14,13 +14,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "shipping")
-public class Shipping {
+public class ShippingOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Long orderId;
-    private String trackingNumber;
+    private OrderStatus orderStatus;
     private LocalDateTime shippingDate;
-    private boolean isDelivered;
 }

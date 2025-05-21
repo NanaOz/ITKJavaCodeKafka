@@ -1,9 +1,9 @@
 package com.javacode.notifications_service.repository;
 
-import com.javacode.notifications_service.model.Notification;
+import com.javacode.notifications_service.model.NotificationOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NotificationRepository extends JpaRepository<Notification, Long> {
+public interface OrderRepository extends JpaRepository<NotificationOrder, Long> {
 }

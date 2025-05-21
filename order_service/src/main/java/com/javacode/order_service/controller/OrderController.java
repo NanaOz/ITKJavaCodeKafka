@@ -36,5 +36,4 @@ public class OrderController {
         orderService.deleteOrder(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
 }

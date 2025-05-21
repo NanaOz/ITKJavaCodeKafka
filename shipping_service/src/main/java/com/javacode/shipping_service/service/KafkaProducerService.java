@@ -1,8 +1,8 @@
-package com.javacode.order_service.service;
+package com.javacode.shipping_service.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javacode.order_service.dto.OrderDTO;
+import com.javacode.shipping_service.dto.OrderDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
