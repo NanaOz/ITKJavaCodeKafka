@@ -3,7 +3,7 @@ package com.javacode.shipping_service.service;
 import com.javacode.shipping_service.dto.OrderDTO;
 import com.javacode.shipping_service.model.ShippingOrder;
 import com.javacode.shipping_service.model.OrderStatus;
-import com.javacode.shipping_service.repository.OrderRepository;
+import com.javacode.shipping_service.repository.ShippingOrderRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class OrderService {
-    private final OrderRepository orderRepository;
+public class ShippingOrderService {
+    private final ShippingOrderRepository shippingOrderRepository;
     private final KafkaProducerService kafkaProducerService;
-    private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShippingOrderService.class);
 
-    public OrderService(OrderRepository orderRepository, KafkaProducerService kafkaProducerService) {
-        this.orderRepository = orderRepository;
+    public ShippingOrderService(ShippingOrderRepository shippingOrderRepository, KafkaProducerService kafkaProducerService) {
+        this.shippingOrderRepository = shippingOrderRepository;
         this.kafkaProducerService = kafkaProducerService;
     }
 
@@ -31,6 +31,6 @@ public class OrderService {
     }
 
     public Optional<ShippingOrder> getOrderById(Long id) {
-        return orderRepository.findById(id);
+        return shippingOrderRepository.findById(id);
     }
 }

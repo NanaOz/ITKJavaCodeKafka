@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepository extends JpaRepository<NotificationOrder, Long> {
+public interface NotificationOrderRepository extends JpaRepository<NotificationOrder, Long> {
 }
