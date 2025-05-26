@@ -1,5 +1,7 @@
 package com.javacode.payment_service.dto;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javacode.payment_service.model.PaymentOrder;
 import com.javacode.payment_service.model.OrderStatus;
 import lombok.AllArgsConstructor;
@@ -31,5 +33,9 @@ public class OrderDTO {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid order status: " + orderStatus);
         }
+    }
+
+    public static OrderDTO fromJson(String json) throws JsonProcessingException {
+        return new ObjectMapper().readValue(json, OrderDTO.class);
     }
 }

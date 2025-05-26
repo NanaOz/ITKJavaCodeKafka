@@ -6,7 +6,9 @@ import com.javacode.payment_service.model.OrderStatus;
 import com.javacode.payment_service.repository.PaymentOrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -22,10 +24,13 @@ public class PaymentOrderService {
         this.kafkaProducerService = kafkaProducerService;
     }
 
+    @Async
+    @Transactional
     public void processPayment(Long id) {
-        PaymentOrder paymentOrder = getOrderById(id).orElseThrow();
+        PaymentOrder paymentOrder = getOrderById(id)
+                .orElseThrow(() -> new RuntimeException("Платежное поручение не найдено: " + id));
         paymentOrder.setStatus(OrderStatus.COMPLETED);
-        paymentOrder.setPaymentDate(LocalDateTime.now());
+//        paymentOrder.setPaymentDate(LocalDateTime.now());
         paymentOrderRepository.save(paymentOrder);
         kafkaProducerService.sendMessage(OrderDTO.fromOrder(paymentOrder));
         logger.info("Получено новое сообщение о заказе: {}", paymentOrder);

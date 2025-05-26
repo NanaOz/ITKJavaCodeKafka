@@ -4,10 +4,8 @@ import com.javacode.order_service.dto.OrderDTO;
 import com.javacode.order_service.model.Order;
 import com.javacode.order_service.model.OrderStatus;
 import com.javacode.order_service.repository.OrderRepository;
-import jakarta.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderService {

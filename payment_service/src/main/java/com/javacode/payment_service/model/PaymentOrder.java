@@ -19,4 +19,10 @@ public class PaymentOrder {
     private Long id;
     private OrderStatus status;
     private LocalDateTime paymentDate;
+
+    public PaymentOrder(Long id) {
+        this.id = id;
+        this.status = OrderStatus.PROCESSING;
+        this.paymentDate = LocalDateTime.now();
+    }
 }
